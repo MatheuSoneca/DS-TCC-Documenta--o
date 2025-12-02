@@ -1,191 +1,243 @@
-# 1. Identificação do Projeto
+**Sistema Web + PWA para Agendamentos em Salões de Beleza**
 
-## 1.1 Nome do Sistema
+## 1. Identificação do Projeto
 
-**Nome do sistema:** Corte em Dia  
+### 1.1 Nome do Sistema – Corte em Dia
 
-O sistema **Corte em Dia** foi pensado para atender salões de beleza e cabeleireiros que precisam organizar melhor seus agendamentos. O nome remete à ideia de manter o cliente sempre “em dia” com o corte, coloração ou tratamento, reforçando a proposta de praticidade e organização tanto para o profissional quanto para o cliente.
+O sistema **Corte em Dia** foi idealizado para atender barbearias e salões de beleza que necessitam de um controle eficiente e moderno de agendamentos. O nome reforça a proposta de manter tanto o profissional quanto o cliente sempre “em dia” com seus horários, destacando organização, eficiência e praticidade.
 
-Além disso, é um nome curto, fácil de lembrar e pronunciar, mantendo um tom profissional e diretamente relacionado ao contexto de agendamento de serviços de cabelo e estética.
+É curto, fácil de lembrar e diretamente associado ao segmento de beleza e estética, facilitando sua identificação no mercado.
 
----
+### 1.2 Integrantes do Grupo
 
-## 1.2 Integrantes do Grupo
-
-- **Matheus Viana Dantas** – Responsável pelo **Front-end Web** e apoio na versão **PWA**  
-- **Guilherme Soares Ferreira** – Responsável pela **integração com o Back-end/Supabase** e **modelagem de dados**
-
----
-
-# 2. Apresentação do Projeto
-
-## 2.1 Objetivo do Sistema
-
-O sistema **Corte em Dia** tem como objetivo centralizar e automatizar o processo de agendamento de serviços em um salão de beleza ou cabeleireiro, como corte de cabelo, progressiva, luzes, coloração, alongamento, entre outros.  
-
-Através da versão **web**, o profissional poderá administrar a agenda, cadastrar serviços com durações diferentes, acompanhar os horários disponíveis e visualizar de forma organizada o fluxo do dia.  
-
-A versão **mobile em formato PWA** será voltada principalmente para os clientes, permitindo que consultem horários disponíveis, escolham o serviço desejado e realizem o agendamento diretamente pelo celular. As duas versões utilizam a mesma base de dados, garantindo atualização em tempo real e evitando conflitos de agenda.
+| Integrante               | Função Principal                                              |
+| ------------------------ | ------------------------------------------------------------- |
+| Matheus Viana Dantas     | Desenvolvimento Front-end Web e apoio no PWA                 |
+| Guilherme Soares Ferreira| Desenvolvimento Back-end (Node.js, PostgreSQL), API e integração geral |
 
 ---
 
-## 2.2 Problema Identificado (A Dor)
+## 2. Apresentação do Projeto
 
-Atualmente, muitos cabeleireiros e salões de bairro organizam seus horários de forma manual, utilizando agenda de papel, bloco de notas, conversas no WhatsApp ou simples “lembranças de cabeça”. Esse modelo aumenta a chance de erros, como marcação duplicada, esquecimentos de clientes, falhas na comunicação sobre atrasos e dificuldade em visualizar o tempo real disponível para cada tipo de serviço, gerando desorganização e perda potencial de clientes.
+### 2.1 Objetivo do Sistema
 
-O público-alvo principal são **cabeleireiros autônomos e pequenos salões de beleza** que oferecem serviços variados (cortes, químicas, tratamentos, etc.) e possuem agenda relativamente cheia, mas não contam com um sistema especializado. Hoje, muitos utilizam apenas WhatsApp para combinar horários, o que depende de respostas manuais e não possui cálculo automático da duração dos serviços. Outros utilizam aplicativos genéricos de agenda, que não consideram as particularidades de serviços de beleza com tempos diferentes.
+O **Corte em Dia** tem como objetivo principal automatizar e organizar o processo de agendamentos para barbearias e salões de beleza, garantindo mais eficiência ao profissional e autonomia ao cliente.
 
-A solução proposta se destaca por trabalhar com **serviços pré-definidos com duração estimada**, permitindo que o sistema calcule automaticamente quais horários realmente comportam o serviço escolhido pelo cliente. Se o salão tem um intervalo livre de 14h30 às 15h30, por exemplo, apenas serviços com duração compatível serão exibidos como disponíveis. Isso reduz erros, evita promessas de horários inviáveis e melhora a experiência de uso.
+#### Versão Web (Profissional)
 
-A existência de uma **versão web** é importante para o profissional, que normalmente gerencia a agenda em um computador ou notebook, com visão mais ampla do dia, da semana e dos serviços cadastrados. Já a **versão mobile em PWA** é essencial para os clientes, que costumam agendar pelo celular, em diferentes momentos e locais, precisando de acesso rápido e sem necessidade de instalar um aplicativo nativo. As duas versões se complementam para garantir organização ao salão e praticidade ao cliente.
+Criada para uso administrativo, permitindo ao barbeiro:
 
----
+- Visualizar agenda diária
+- Cadastrar, editar e remover serviços
+- Organizar clientes
+- Gerenciar horários livres e ocupados
+- Evitar conflitos de agendamento
+- Visualizar fluxo completo do dia
 
-## 2.3 Stack Tecnológica
+#### Versão Mobile (PWA – Cliente)
 
-### 2.3.1 Front-end Web
+Voltada para clientes, com foco em praticidade:
 
-- **Framework/Linguagem:** React.js  
-- **Biblioteca de UI:** Tailwind  
-- **Roteamento:** React Router  
-- **Consumo de API:** Axios  
+- Listar serviços disponíveis
+- Consultar horários compatíveis automaticamente
+- Agendar dia e horário
+- Ver futuros agendamentos
+- Instalar o app na tela inicial como aplicativo nativo
 
-**Justificativa:**  
-O React.js é amplamente utilizado no mercado e baseado em componentes, facilitando a reutilização e manutenção do código. A equipe já possui familiaridade com React, reduzindo a curva de aprendizado. O Material UI oferece componentes prontos, responsivos e com design profissional, acelerando o desenvolvimento e garantindo consistência visual.  
+Ambas as versões se conectam à mesma **base de dados**, garantindo sincronização imediata.
 
-O **React Router** será utilizado para gerenciar a navegação entre as páginas principais (login, agenda, serviços, clientes), proporcionando uma experiência de SPA (Single Page Application).  
+### 2.2 Problema Identificado (A Dor)
 
-O **Axios** será utilizado para consumir as APIs fornecidas pelo back-end (Supabase), padronizando chamadas HTTP e o tratamento de respostas e erros.
+Grande parte das barbearias de pequeno porte ainda utiliza métodos tradicionais para organizar seus horários:
 
----
+- Agendas de papel
+- Mensagens no WhatsApp
+- Anotações desconexas
+- Dependência de memória do profissional
 
-### 2.3.2 Versão Mobile (PWA)
+Esse modelo traz problemas como:
 
-- **Tecnologia base:** React.js (reaproveitando boa parte da base do front-end web)  
-- **Recursos de PWA:**
-  - Service Workers para cache básico e funcionamento com conexão instável.
-  - Web App Manifest para permitir a instalação do sistema na tela inicial do celular.
+- Horários duplicados
+- Falta de controle sobre duração dos serviços
+- Perda de clientes por desorganização
+- Dificuldade em gerenciar dias cheios
+- Comunicação lenta com clientes
 
-**Justificativa da escolha PWA:**  
-O sistema é focado em formulários, listagem e agendamento de horários, sem necessidade de recursos nativos avançados (câmera, GPS, sensores). A abordagem PWA permite reaproveitar código da versão web, reduzindo tempo de desenvolvimento e facilitando a manutenção.  
+**Público-alvo:**
 
-O usuário consegue “instalar” o sistema no celular sem passar por lojas de aplicativos, simplificando a distribuição e o acesso.
+- Barbeiros autônomos
+- Barbearias de bairro
+- Salões pequenos com fluxo constante
 
----
+#### Soluções atuais e problemas
 
-### 2.3.3 Back-end
+Ferramentas genéricas (Google Calendar, anotações, blocos) não atendem necessidades específicas como:
 
-- **Banco de Dados e BaaS:** Supabase (PostgreSQL)  
-- **Tipo de API:** REST  
-- **Autenticação:** Supabase Auth  
-- **Armazenamento de arquivos (opcional):** Supabase Storage  
+- Duração real de cada serviço
+- Filtragem inteligente de horários compatíveis
+- Comunicação direta com clientes integrada à agenda
 
-**Justificativa:**  
-O Supabase fornece um banco de dados **PostgreSQL** com geração automática de **APIs REST**, facilitando o desenvolvimento da camada de back-end. O front-end (web e PWA) consome essas APIs usando JavaScript e Axios, mantendo a stack unificada.  
+#### Por que o Corte em Dia se destaca?
 
-O **Supabase Auth** será utilizado para gerenciar autenticação e autorização de usuários, permitindo controle de acesso para cabeleireiros e, se desejado, para clientes. O **Supabase Storage** poderá ser usado para armazenar arquivos relacionados ao sistema, como logotipos do salão.  
+O sistema calcula automaticamente **quais horários realmente comportam o serviço escolhido**, evitando situações como:
 
-Se necessário, o Supabase oferece ainda funções, políticas de segurança (RLS) e Edge Functions em JavaScript/TypeScript, sem a necessidade inicial de um servidor dedicado. A API REST atende bem ao modelo de CRUD para agendamentos, clientes e serviços.
+> “Dá para colocar às 14h30?” mesmo que o serviço leve 1h30 e o barbeiro só tenha 1h livre.
 
----
+#### Justificativa Web + PWA
 
-# 3. Arquitetura e Fluxo do Sistema
+- **Web (Profissional):** mais espaço, visão detalhada da agenda, foco em produtividade.
+- **PWA (Cliente):** uso natural via smartphone, instalação simples, experiência de app sem precisar de loja.
 
-## 3.1 Mapa de Telas
+As versões funcionam juntas, formando um sistema completo e acessível.
 
-A seguir são apresentadas as principais telas previstas para o sistema **Corte em Dia**. A estrutura poderá ser refinada na Etapa 2 conforme as necessidades identificadas no desenvolvimento.
+### 2.3 Stack Tecnológica
 
-- **Tela 1: Login**  
-  - **Versão:** Web e Mobile (PWA)  
-  - **Objetivo:** Permitir o acesso de cabeleireiros e clientes.  
-  - **Resumo:** Campos de e-mail e senha, botão de entrada, opção de recuperação de senha e, opcionalmente, acesso ao cadastro de cliente.
+A stack utilizada é baseada em tecnologias modernas e foi pensada para um sistema **single-tenant** (uma barbearia por instância).
 
-- **Tela 2: Agenda do Dia (Profissional)**  
-  - **Versão:** Web  
-  - **Objetivo:** Exibir os agendamentos do dia e os horários livres para o cabeleireiro.  
-  - **Resumo:** Visualização da agenda por dia, horários ocupados/livres e acesso para criar, editar ou cancelar agendamentos.
+#### 2.3.1 Front-end Web
 
-- **Tela 3: Gestão de Serviços**  
-  - **Versão:** Web  
-  - **Objetivo:** Cadastrar e gerenciar os serviços oferecidos e suas durações estimadas.  
-  - **Resumo:** Lista de serviços e formulário de criação/edição (nome, duração etc.).
+- **React.js + Vite**
+- **TailwindCSS**
+- **ShadCN UI / Radix UI** (biblioteca de componentes)
+- **React Router** (navegação SPA)
+- **Axios** (requisições HTTP)
+- **Zustand ou Context API** (estado global)
 
-- **Tela 4: Gestão de Clientes / Cadastro de Cliente**  
-  - **Versão:** Web e Mobile (PWA, em versão simplificada)  
-  - **Objetivo:** Manter os dados básicos dos clientes e permitir cadastro quando necessário.  
-  - **Resumo:** Lista ou busca de clientes (no Web) e formulário de cadastro/edição (nome, e-mail, telefone etc.).
+**Justificativa:** O combo **React + Vite** garante rapidez e modularidade. **Tailwind** e **ShadCN** permitem criar interfaces modernas e consistentes. As ferramentas escolhidas facilitam manutenção, escalabilidade e evolução do projeto.
 
-- **Tela 5: Escolha de Serviço (Cliente)**  
-  - **Versão:** Mobile (PWA)  
-  - **Objetivo:** Permitir que o cliente selecione o serviço que deseja agendar.  
-  - **Resumo:** Lista de serviços disponíveis com sua duração estimada e ação para avançar à escolha de data e horário.
+#### 2.3.2 Versão Mobile (PWA)
 
-- **Tela 6: Seleção de Data e Horário (Cliente)**  
-  - **Versão:** Mobile (PWA)  
-  - **Objetivo:** Mostrar ao cliente os horários disponíveis compatíveis com o serviço escolhido.  
-  - **Resumo:** Seleção de data e exibição de horários disponíveis já filtrados de acordo com a duração do serviço.
+Baseada na mesma estrutura da Web:
 
-- **Tela 7: Meus Agendamentos (Cliente)**  
-  - **Versão:** Mobile (PWA)  
-  - **Objetivo:** Permitir que o cliente visualize seus agendamentos futuros e, se permitido, cancele algum deles.  
-  - **Resumo:** Lista de agendamentos com data, horário e serviço, opção de ver detalhes, cancelar e iniciar novo agendamento.
+- React + Tailwind
+- Vite Plugin PWA
 
----
+**Service Worker:**
 
-## 3.2 Fluxograma de Navegação
+- Cache básico
+- Fallback offline
 
-A navegação do sistema é organizada em fluxos principais separados por tipo de usuário.
+**Web App Manifest:**
 
-### 3.2.1 Fluxo – Profissional (Web)
+- Instalação como app nativo
+- Ícone, nome e tema configurados
 
-- **Login (Tela 1)**  
-  → Usuário cabeleireiro se autentica  
-  → Redirecionamento para **Agenda do Dia (Tela 2)**  
+**Futuro:**
 
-- **Agenda do Dia (Tela 2)**  
-  → Visualiza agendamentos e horários livres  
-  → Pode:
-  - Criar novo agendamento manual em um horário livre  
-  - Acessar detalhes/edição de um agendamento existente  
-  - Navegar para:
-    - **Gestão de Serviços (Tela 3)**  
-    - **Gestão de Clientes (Tela 4)**  
+- Suporte a **push notifications** (notificações de lembrete, confirmação etc.)
 
-- **Gestão de Serviços (Tela 3)**  
-  → Cadastrar/editar/excluir serviços  
-  → Retornar para **Agenda do Dia (Tela 2)**  
+**Justificativa:** PWA é ideal para sistemas que não dependem de câmera, GPS ou sensores avançados. Além disso:
 
-- **Gestão de Clientes (Tela 4 – Web)**  
-  → Visualizar e editar dados de clientes, cadastrar novos  
-  → Retornar para **Agenda do Dia (Tela 2)**  
+- Menor custo
+- Mesma base de código da Web
+- Fácil distribuição
+- Melhor experiência no celular
 
-Em qualquer momento, o profissional poderá sair do sistema e voltar à **Tela 1 (Login)**.
+#### 2.3.3 Back-end
 
----
+- **Node.js + Express**
+- **API REST**
+- **Prisma ORM**
+- **PostgreSQL**
+- **JWT** para autenticação
+- **Bcrypt** para hashing de senha
 
-### 3.2.2 Fluxo – Cliente (Mobile/PWA)
+Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
-- **Login (Tela 1)**  
-  → Cliente se autentica (ou acessa fluxo de cadastro, quando disponível)  
-  → Redirecionamento para **Escolha de Serviço (Tela 5)**  
+**Justificativa:** A arquitetura permite:
 
-- **Escolha de Serviço (Tela 5)**  
-  → Cliente seleciona o serviço desejado  
-  → Avança para **Seleção de Data e Horário (Tela 6)**  
+- Desenvolvimento rápido
+- Boa escalabilidade
+- Segurança com autenticação moderna (JWT + Bcrypt)
+- Padronização entre Web e PWA por meio de API REST
 
-- **Seleção de Data e Horário (Tela 6)**  
-  → Cliente escolhe a data  
-  → Sistema exibe apenas horários compatíveis com a duração do serviço  
-  → Cliente escolhe um horário disponível  
-  → Confirma → criação do agendamento no sistema  
-  → Redirecionamento para **Meus Agendamentos (Tela 7)**  
+#### 2.3.4 Infraestrutura
 
-- **Meus Agendamentos (Tela 7)**  
-  → Cliente visualiza seus agendamentos futuros  
-  → Pode, conforme regras definidas, cancelar algum agendamento  
-  → Pode iniciar um novo agendamento, retornando para **Tela 5 (Escolha de Serviço)**
+- **Frontend:** hospedado em Hostinger (build gerado na pasta `dist/`)
+- **Backend:** servidor Node.js (Hostinger, Railway etc.)
+- **Cloudflare:**
+  - DNS
+  - SSL
+  - Cache
+  - Proteções de segurança
 
 ---
+
+## 3. Arquitetura e Fluxo do Sistema
+
+### 3.1 Mapa de Telas
+
+**Tela 1 — Login**
+
+- **Versões:** Web e PWA
+- **Objetivo:** Autenticar usuários (profissional ou cliente).
+- **Componentes:**
+  - Campo de e-mail
+  - Campo de senha
+  - Botão **Entrar**
+  - Link **"Esqueci minha senha"**
+  - Link **"Criar conta"** (somente cliente)
+
+**Tela 2 — Agenda do Dia (Profissional)**
+
+- **Versão:** Web
+- **Objetivo:** Gerenciar toda a agenda diária.
+- **Recursos:**
+  - Lista de horários ocupados/livres
+  - Ação para criar agendamento
+  - Editar/cancelar agendamentos
+  - Navegar entre dias
+
+**Tela 3 — Gestão de Serviços (Profissional)**
+
+- **Versão:** Web
+- **Recursos:**
+  - Nome do serviço
+  - Duração estimada
+  - Preço (opcional)
+  - Criar/editar/excluir serviços
+
+**Tela 4 — Gestão de Clientes / Cadastro**
+
+- **Versões:** Web e PWA (simplificado)
+- **Recursos:**
+  - Lista de clientes (Web)
+  - Formulário com nome, telefone, e-mail
+
+**Tela 5 — Escolha de Serviço (Cliente)**
+
+- **Versão:** PWA
+- **Recursos:**
+  - Catálogo de serviços
+  - Botões para seleção
+
+**Tela 6 — Seleção de Data e Horário (Cliente)**
+
+- **Versão:** PWA
+- **Recursos:**
+  - Calendário
+  - Horários disponíveis filtrados automaticamente
+  - Confirmação de agendamento
+
+**Tela 7 — Meus Agendamentos (Cliente)**
+
+- **Versão:** PWA
+- **Recursos:**
+  - Lista de agendamentos futuros
+  - Cancelamento (com regras)
+  - Iniciar novo agendamento
+
+### 3.2 Fluxograma de Navegação
+
+#### Fluxo do Profissional (Web)
+
+```text
+Login → Agenda do Dia
+      ├── Criar Agendamento
+      ├── Editar Agendamento
+      ├── Cancelar Agendamento
+      ├── Gestão de Serviços
+      └── Gestão de Clientes
 
 ### 3.2.3 Fluxo de Cadastro de Cliente (Opcional)
 
