@@ -126,16 +126,14 @@ Baseada na mesma estrutura da Web:
 - Menor custo
 - Mesma base de código da Web
 - Fácil distribuição
-- 
+  
 
 #### 2.3.3 Back-end
 
 - **Node.js + Express**
 - **API REST**
-- **Prisma ORM**
 - **PostgreSQL**
-- **JWT** para autenticação
-- **Bcrypt** para hashing de senha
+- **Supabase Auth** para autenticação
 
 Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
@@ -146,17 +144,6 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 - Segurança com autenticação moderna (JWT + Bcrypt)
 - Padronização entre Web e PWA por meio de API REST
 
-#### 2.3.4 Infraestrutura
-
-- **Frontend:** hospedado em Hostinger (build gerado na pasta `dist/`)
-- **Backend:** servidor Node.js (Hostinger, Railway etc.)
-- **Cloudflare:**
-  - DNS
-  - SSL
-  - Cache
-  - Proteções de segurança
-
----
 
 ## 3. Arquitetura e Fluxo do Sistema
 
@@ -164,7 +151,6 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
 **Tela 1 — Login**
 
-- **Versões:** Web e PWA
 - **Objetivo:** Autenticar usuários (profissional ou cliente).
 - **Componentes:**
   - Campo de e-mail
@@ -175,7 +161,6 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
 **Tela 2 — Agenda do Dia (Profissional)**
 
-- **Versão:** Web
 - **Objetivo:** Gerenciar toda a agenda diária.
 - **Recursos:**
   - Lista de horários ocupados/livres
@@ -185,7 +170,6 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
 **Tela 3 — Gestão de Serviços (Profissional)**
 
-- **Versão:** Web
 - **Recursos:**
   - Nome do serviço
   - Duração estimada
@@ -194,21 +178,18 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
 **Tela 4 — Gestão de Clientes / Cadastro**
 
-- **Versões:** Web e PWA (simplificado)
 - **Recursos:**
   - Lista de clientes (Web)
   - Formulário com nome, telefone, e-mail
 
 **Tela 5 — Escolha de Serviço (Cliente)**
 
-- **Versão:** PWA
 - **Recursos:**
   - Catálogo de serviços
   - Botões para seleção
 
 **Tela 6 — Seleção de Data e Horário (Cliente)**
 
-- **Versão:** PWA
 - **Recursos:**
   - Calendário
   - Horários disponíveis filtrados automaticamente
@@ -216,32 +197,67 @@ Hospedagem do servidor em ambiente Node (Hostinger, Railway etc.).
 
 **Tela 7 — Meus Agendamentos (Cliente)**
 
-- **Versão:** PWA
 - **Recursos:**
   - Lista de agendamentos futuros
   - Cancelamento (com regras)
   - Iniciar novo agendamento
 
-### 3.2 Fluxograma de Navegação
 
-#### Fluxo do Profissional (Web)
 
-```text
-Login → Agenda do Dia
-      ├── Criar Agendamento
-      ├── Editar Agendamento
-      ├── Cancelar Agendamento
-      ├── Gestão de Serviços
-      └── Gestão de Clientes
-```
+## 3.2 Fluxograma de Navegação
 
-### 3.2.3 Fluxo de Cadastro de Cliente (Opcional)
+A navegação do sistema é organizada em fluxos principais separados por tipo de usuário.
 
-Caso o sistema permita que o próprio cliente crie sua conta:
+### 3.2.1 Fluxo – Profissional 
 
 - **Login (Tela 1)**  
-  → Clique em “Criar conta”  
-  → Redirecionamento para **Cadastro de Cliente (Tela 4 – Mobile)**  
+  → Usuário cabeleireiro se autentica  
+  → Redirecionamento para **Agenda do Dia (Tela 2)**  
+
+- **Agenda do Dia (Tela 2)**  
+  → Visualiza agendamentos e horários livres  
+  → Pode:
+  - Criar novo agendamento manual em um horário livre  
+  - Acessar detalhes/edição de um agendamento existente  
+  - Navegar para:
+    - **Gestão de Serviços (Tela 3)**  
+
+- **Gestão de Serviços (Tela 3)**  
+  → Cadastrar/editar/excluir serviços  
+  → Retornar para **Agenda do Dia (Tela 2)**   
+
+Em qualquer momento, o profissional poderá sair do sistema e voltar à **Tela 1 (Login)**.
+
+---
+
+### 3.2.2 Fluxo – Cliente
+
+- **Login (Tela 1)**  
+  → Cliente se autentica (ou acessa fluxo de cadastro, quando disponível)  
+  → Redirecionamento para **Escolha de Serviço (Tela 5)**  
+
+- **Escolha de Serviço (Tela 5)**  
+  → Cliente seleciona o serviço desejado  
+  → Avança para **Seleção de Data e Horário (Tela 6)**  
+
+- **Seleção de Data e Horário (Tela 6)**  
+  → Cliente escolhe a data  
+  → Sistema exibe apenas horários compatíveis com a duração do serviço  
+  → Cliente escolhe um horário disponível  
+  → Confirma → criação do agendamento no sistema  
+  → Redirecionamento para **Meus Agendamentos (Tela 7)**  
+
+- **Meus Agendamentos (Tela 7)**  
+  → Cliente visualiza seus agendamentos futuros  
+  → Pode, conforme regras definidas, cancelar algum agendamento  
+  → Pode iniciar um novo agendamento, retornando para **Tela 5 (Escolha de Serviço)**
+
+---
+
+### 3.2.3 Fluxo de Cadastro de Cliente
+
+- **Login (Tela 1)**  
+  → Clique em “Criar conta”   
   → Após o cadastro bem-sucedido, o cliente é redirecionado para o fluxo principal de agendamento, iniciando em **Escolha de Serviço (Tela 5)**.
 
 ---
@@ -253,8 +269,6 @@ As funcionalidades do sistema **Corte em Dia** foram organizadas em três nívei
 - **Essenciais (MVP):** necessárias para o funcionamento básico.  
 - **Importantes:** agregam valor e melhoram a experiência.  
 - **Desejáveis:** podem ser implementadas se houver tempo (melhorias futuras).
-
-Abaixo estão descritas as funcionalidades com foco em **nome**, **descrição resumida**, **telas envolvidas** e **versões**. Detalhes técnicos mais finos poderão ser ajustados na Etapa 2.
 
 ---
 
@@ -268,62 +282,46 @@ Abaixo estão descritas as funcionalidades com foco em **nome**, **descrição r
 2. **Cadastro e Gestão de Serviços**  
    - **Descrição:** Cadastro, edição e exclusão de serviços oferecidos (ex.: corte, progressiva, luzes), incluindo duração estimada.  
    - **Telas envolvidas:** Tela 3 – Gestão de Serviços  
-   - **Versões:** Web
 
-3. **Cadastro Básico de Clientes**  
-   - **Descrição:** Registro de dados básicos de clientes (nome, e-mail, telefone), para uso nos agendamentos e contato.  
-   - **Telas envolvidas:** Tela 4 – Gestão de Clientes / Cadastro de Cliente  
-   - **Versões:** Web e, de forma simplificada, Mobile (PWA)
-
-4. **Agendamento de Serviço com Cálculo Automático de Horário (Cliente)**  
+3. **Agendamento de Serviço com Cálculo Automático de Horário (Cliente)**  
    - **Descrição:** Permite ao cliente agendar um serviço, exibindo apenas horários compatíveis com a duração do serviço escolhido.  
    - **Telas envolvidas:** Tela 5 – Escolha de Serviço; Tela 6 – Seleção de Data e Horário  
-   - **Versões:** Mobile (PWA)
 
-5. **Criação de Agendamento no Banco de Dados**  
+4. **Criação de Agendamento no Banco de Dados**  
    - **Descrição:** Registro do agendamento (cliente, serviço, data, horário de início e término) no Supabase após confirmação.  
    - **Telas envolvidas:** Fluxo de confirmação dentro da Seleção de Data e Horário  
-   - **Versões:** Mobile (PWA), com reflexo na Web (Agenda do Dia)
 
-6. **Visualização da Agenda do Dia (Profissional)**  
+5. **Visualização da Agenda do Dia (Profissional)**  
    - **Descrição:** Exibição dos agendamentos do dia e horários livres para o cabeleireiro.  
    - **Telas envolvidas:** Tela 2 – Agenda do Dia  
-   - **Versões:** Web
 
-7. **Meus Agendamentos (Cliente)**  
+6. **Meus Agendamentos (Cliente)**  
    - **Descrição:** Lista de agendamentos futuros do cliente, com informações de serviço, data e horário.  
    - **Telas envolvidas:** Tela 7 – Meus Agendamentos  
-   - **Versões:** Mobile (PWA)
 
 ---
 
 ## 4.2 Funcionalidades Importantes
 
-8. **Edição e Cancelamento de Agendamentos (Profissional)**  
+7. **Edição e Cancelamento de Agendamentos (Profissional)**  
    - **Descrição:** Permite ao cabeleireiro ajustar ou cancelar agendamentos já criados, liberando o horário quando necessário.  
    - **Telas envolvidas:** Tela 2 – Agenda do Dia (e/ou tela de detalhes de agendamento)  
-   - **Versões:** Web
 
-9. **Cancelamento de Agendamento pelo Cliente (com regras de antecedência)**  
+8. **Cancelamento de Agendamento pelo Cliente (com regras de antecedência)**  
    - **Descrição:** Permite que o cliente cancele seus agendamentos, respeitando regras de antecedência definidas.  
    - **Telas envolvidas:** Tela 7 – Meus Agendamentos  
-   - **Versões:** Mobile (PWA)
 
-10. **Recuperação de Senha**  
+9. **Recuperação de Senha**  
     - **Descrição:** Recuperação de acesso ao sistema por meio de link de redefinição de senha via e-mail (Supabase Auth).  
     - **Telas envolvidas:** Tela 1 – Login (fluxo “Esqueci minha senha”)  
-    - **Versões:** Web e Mobile (PWA)
 
-11. **Filtros e Navegação por Data na Agenda (Profissional)**  
+10. **Filtros e Navegação por Data na Agenda (Profissional)**  
     - **Descrição:** Navegação entre dias (anterior/próximo) e filtros simples na agenda, facilitando a visualização da carga de trabalho.  
     - **Telas envolvidas:** Tela 2 – Agenda do Dia  
-    - **Versões:** Web
 
 ---
 
-## 4.3 Funcionalidades Desejáveis (Melhorias Futuras)
-
-*(Opcional, dependendo do tempo disponível na Etapa 2.)*
+## 4.3 Funcionalidades Desejáveis
 
 - **Notificações por e-mail ou mensagem como lembrete de agendamento**  
 - **Notificações push (PWA)**  
@@ -340,7 +338,7 @@ A identidade visual do **Corte em Dia** será simples, moderna e alinhada ao con
 
 Para tipografia, a ideia é utilizar fontes sem serifa, como **Roboto** ou similar, por apresentarem boa leitura em telas pequenas e grandes. Títulos e elementos de destaque utilizarão pesos mais fortes, enquanto textos de apoio terão peso regular.
 
-O uso do **Material UI (MUI)** auxiliará a manter consistência visual entre componentes (botões, campos de formulário, diálogos, navegação), com foco na clareza das informações de horário, serviço e status dos agendamentos.
+O uso do **Tailwind** auxiliará a manter consistência visual entre componentes (botões, campos de formulário, diálogos, navegação), com foco na clareza das informações de horário, serviço e status dos agendamentos.
 
 ---
 
@@ -352,13 +350,11 @@ A versão web do **Corte em Dia** será desenvolvida com foco em layout responsi
 - **Tablets e telas intermediárias:** mantém as mesmas funcionalidades com reorganização de layout (colunas reduzidas, menus recolhidos etc.).  
 - **Mobile:** embora exista o PWA como versão principal para o cliente, a aplicação web também será utilizável em telas menores, com ajustes de espaçamento, tamanho de fonte e componentes amigáveis ao toque.
 
-Serão adotados breakpoints compatíveis com o comportamento padrão do Material UI, permitindo que a interface se reorganize automaticamente conforme a largura da tela.
-
 ---
 
 ## 5.3 Diferenças de Experiência entre Web e Mobile/PWA
 
-- **Versão Web (Profissional):**
+- **Versão Web (Administrador):**
   - Focada na gestão da agenda, serviços e clientes.  
   - Aproveita o espaço de tela maior para exibir mais informações simultaneamente (agenda do dia, menus laterais/superiores).  
   - Interações pensadas para uso com teclado e mouse, otimizando a produtividade no dia a dia do salão.
