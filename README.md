@@ -46,7 +46,7 @@ A existência de uma **versão web** é importante para o profissional, que norm
 ### 2.3.1 Front-end Web
 
 - **Framework/Linguagem:** React.js  
-- **Biblioteca de UI:** Material UI (MUI)  
+- **Biblioteca de UI:** Tailwind  
 - **Roteamento:** React Router  
 - **Consumo de API:** Axios  
 
