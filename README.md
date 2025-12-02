@@ -23,7 +23,7 @@ O sistema **Corte em Dia** foi idealizado para atender barbearias e salões de b
 
 O **Corte em Dia** tem como objetivo principal automatizar e organizar o processo de agendamentos para barbearias e salões de beleza, garantindo mais eficiência ao profissional e autonomia ao cliente.
 
-#### Versão Web (Profissional)
+#### Visão Administrativa (Profissional)
 
 Criada para uso administrativo, permitindo ao barbeiro:
 
@@ -33,8 +33,9 @@ Criada para uso administrativo, permitindo ao barbeiro:
 - Gerenciar horários livres e ocupados
 - Evitar conflitos de agendamento
 - Visualizar fluxo completo do dia
+- Instalar o app na tela inicial como aplicativo nativo
 
-#### Versão Mobile (PWA – Cliente)
+#### Visão Pública (Cliente)
 
 Voltada para clientes, com foco em praticidade:
 
@@ -43,8 +44,7 @@ Voltada para clientes, com foco em praticidade:
 - Agendar dia e horário
 - Ver futuros agendamentos
 - Instalar o app na tela inicial como aplicativo nativo
-
-Ambas as versões se conectam à mesma **base de dados**, garantindo sincronização imediata.
+  
 
 ### 2.2 Problema Identificado
 
@@ -85,8 +85,8 @@ O sistema calcula automaticamente **quais horários realmente comportam o servi�
 
 #### Justificativa Web + PWA
 
-- **Web (Profissional):** mais espaço, visão detalhada da agenda, foco em produtividade.
-- **PWA (Cliente):** uso natural via smartphone, instalação simples, experiência de app sem precisar de loja.
+- **Web (Cliente Profissional):** mais espaço, visão detalhada da agenda, foco em produtividade.
+- **PWA (Cliente e Profissional):** uso natural via smartphone, instalação simples, experiência de app sem precisar de loja.
 
 As versões funcionam juntas, formando um sistema completo e acessível.
 
@@ -98,12 +98,10 @@ A stack utilizada é baseada em tecnologias modernas e foi pensada para um siste
 
 - **React.js + Vite**
 - **TailwindCSS**
-- **ShadCN UI / Radix UI** (biblioteca de componentes)
 - **React Router** (navegação SPA)
 - **Axios** (requisições HTTP)
-- **Zustand ou Context API** (estado global)
 
-**Justificativa:** O combo **React + Vite** garante rapidez e modularidade. **Tailwind** e **ShadCN** permitem criar interfaces modernas e consistentes. As ferramentas escolhidas facilitam manutenção, escalabilidade e evolução do projeto.
+**Justificativa:** O combo **React + Vite** garante rapidez e modularidade. **Tailwind** permitem criar interfaces modernas e consistentes. As ferramentas escolhidas facilitam manutenção, escalabilidade e evolução do projeto.
 
 #### 2.3.2 Versão Mobile (PWA)
 
@@ -122,16 +120,13 @@ Baseada na mesma estrutura da Web:
 - Instalação como app nativo
 - Ícone, nome e tema configurados
 
-**Futuro:**
-
-- Suporte a **push notifications** (notificações de lembrete, confirmação etc.)
 
 **Justificativa:** PWA é ideal para sistemas que não dependem de câmera, GPS ou sensores avançados. Além disso:
 
 - Menor custo
 - Mesma base de código da Web
 - Fácil distribuição
-- Melhor experiência no celular
+- 
 
 #### 2.3.3 Back-end
 
