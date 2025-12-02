@@ -238,6 +238,7 @@ Login → Agenda do Dia
       ├── Cancelar Agendamento
       ├── Gestão de Serviços
       └── Gestão de Clientes
+```
 
 ### 3.2.3 Fluxo de Cadastro de Cliente (Opcional)
 
