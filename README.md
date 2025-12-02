@@ -46,7 +46,7 @@ Voltada para clientes, com foco em praticidade:
 
 Ambas as versões se conectam à mesma **base de dados**, garantindo sincronização imediata.
 
-### 2.2 Problema Identificado (A Dor)
+### 2.2 Problema Identificado
 
 Grande parte das barbearias de pequeno porte ainda utiliza métodos tradicionais para organizar seus horários:
 
