@@ -1,4 +1,4 @@
-**Sistema Web + PWA para Agendamentos em Salões de Beleza**
+**Sistema Web + PWA para Agendamentos**
 
 ## 1. Identificação do Projeto
 
